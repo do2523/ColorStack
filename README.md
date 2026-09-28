@@ -1,6 +1,6 @@
-# COLORS
+# COLORS Lab
 
-COLORS is a small web application for managing a personal list of colors. Users log in, search their saved colors, and add new colors to the collection. The frontend is a set of static HTML, CSS, and JavaScript files that communicates with a PHP LAMP API.
+COLORS Lab is a small web application for managing a personal list of colors. Users log in, search their saved colors, and add new colors to the collection. The frontend is a set of static HTML, CSS, and JavaScript files that communicates with a PHP LAMP API.
 
 ## Technologies Usedd
 
