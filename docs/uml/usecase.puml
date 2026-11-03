@@ -1,0 +1,25 @@
+@startuml
+title COLORS Web Application — Use Case Diagram
+left to right direction
+skinparam packageStyle rectangle
+actor "Visitor" as Visitor
+actor "Logged-in User" as User
+User --|> Visitor
+rectangle "COLORS Web Application" {
+  usecase "Log in" as Login
+  usecase "View saved colors\nby search" as Search
+  usecase "Add a color" as Add
+  usecase "Log out" as Logout
+  usecase "Restore session\nfrom cookie" as Restore
+}
+Visitor --> Login
+Visitor --> Restore
+User --> Search
+User --> Add
+User --> Logout
+note right of Restore
+  color.html reads userId from a browser cookie.
+  No server-side session validation endpoint
+  is implemented in this repository.
+end note
+@enduml

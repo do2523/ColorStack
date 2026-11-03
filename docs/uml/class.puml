@@ -1,0 +1,49 @@
+@startuml
+title COLORS Web Application — Class / Module Diagram
+skinparam classAttributeIconSize 0
+class "ColorsUI (js/code.js)" <<JavaScript module>> {
+  - userId : number
+  - firstName : string
+  - lastName : string
+  + doLogin()
+  + saveCookie()
+  + readCookie()
+  + doLogout()
+  + addColor()
+  + searchColor()
+}
+class "Login.php" <<PHP endpoint>> {
+  + POST(login, password)
+  + returnWithInfo(firstName, lastName, id)
+  + returnWithError(error)
+}
+class "AddColor.php" <<PHP endpoint>> {
+  + POST(color, userId)
+}
+class "SearchColors.php" <<PHP endpoint>> {
+  + POST(search, userId)
+}
+class "Users" <<database table>> {
+  + ID
+  + Login
+  + Password
+  + firstName
+  + lastName
+}
+class "Colors" <<database table>> {
+  + UserId
+  + Name
+}
+ColorsUI ..> "Login.php" : XMLHttpRequest (JSON)
+ColorsUI ..> "AddColor.php" : XMLHttpRequest (JSON)
+ColorsUI ..> "SearchColors.php" : XMLHttpRequest (JSON)
+"Login.php" ..> Users : SELECT credentials
+"AddColor.php" ..> Colors : INSERT color
+"SearchColors.php" ..> Colors : SELECT matching colors
+Users "1" -- "0..*" Colors : owner (UserId)
+note bottom of ColorsUI
+  Browser code is procedural: these are module functions,
+  not declared JavaScript classes. The SQL tables are
+  inferred from queries; full schema is not in repository.
+end note
+@enduml

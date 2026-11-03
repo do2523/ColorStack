@@ -1,0 +1,36 @@
+@startuml
+title COLORS Web Application — Login and Color Operations
+start
+:Open index.html;
+:Enter login and password;
+:POST JSON to Login.php;
+if (Login response has id > 0?) then (yes)
+  :Store firstName, lastName, userId\nin 20-minute browser cookie;
+  :Navigate to color.html;
+  :Read browser cookie;
+  if (userId found?) then (yes)
+    repeat
+      :Choose action;
+      if (Search Color?) then (yes)
+        :Enter search text;
+        :POST search and userId\nto SearchColors.php;
+        :Display returned results\nor request error;
+      else (no)
+        if (Add Color?) then (yes)
+          :Enter color name;
+          :POST color and userId\nto AddColor.php;
+          :Display success message\nor request error;
+        else (Log Out)
+          :Expire browser cookie;
+          :Return to index.html;
+        endif
+      endif
+    repeat while (Continue using colors page?) is (yes)
+  else (no)
+    :Redirect to index.html;
+  endif
+else (no)
+  :Show incorrect credentials message;
+endif
+stop
+@enduml
