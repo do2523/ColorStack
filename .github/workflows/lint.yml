@@ -1,4 +1,4 @@
-name: Frontend lint
+name: Frontend lint and tests
 
 on: [push, pull_request]
 
@@ -15,7 +15,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - name: Install lint tools
+      - name: Install lint and test tools
         id: install
         run: npm ci
       - name: Lint HTML
@@ -26,3 +26,6 @@ jobs:
       - name: Lint JavaScript
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: npm run lint:js
+      - name: Run automated tests
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: npm test

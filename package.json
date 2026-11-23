@@ -5,7 +5,8 @@
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
     "lint:html": "htmlhint \"**/*.html\"",
     "lint:css": "stylelint \"**/*.css\"",
-    "lint:js": "eslint \"**/*.js\" --max-warnings 0"
+    "lint:js": "eslint \"**/*.js\" --max-warnings 0",
+    "test": "node --test"
   },
   "devDependencies": {
     "@eslint/js": "9.39.1",
